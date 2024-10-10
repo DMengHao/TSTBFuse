@@ -188,7 +188,7 @@ class Valuation(object):
         nume = np.sum(np.multiply(QAF, gA) + np.multiply(QBF, gB))
         return nume / deno
 if __name__ == '__main__':
-    Fusion_img = image_read_cv2("/home/dmh/New/NewFusion/1.png" ,'GRAY')
+    Fusion_img = image_read_cv2("./1.png" ,'GRAY')
     IR = image_read_cv2("../vi.png", "GRAY")
     VI = image_read_cv2("../ir.png", "GRAY")
     EN = Valuation.EN(Fusion_img)

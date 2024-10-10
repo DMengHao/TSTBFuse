@@ -1,6 +1,5 @@
 import os
 import datetime
-
 import cv2
 import kornia
 import numpy as np
@@ -10,9 +9,7 @@ from torch.utils.data import DataLoader
 import torch
 from MyDataset import MyDataset
 from Test.DenseBlock import DenseBlock as encoder1
-# from Test.Inception import Inception as encoder2
 from Test.Inception import Inception as encoder2
-# from Test.SAM import spatial_attention as encoder3
 from Test.VIFEM import VIFEM as encoder3
 from Test.Restormer_Decoder import Restormer_Decoder
 import utils.Loss_function as loss_function
@@ -21,27 +18,25 @@ from utils.Loss_function import cc
 from utils.Image_read_and_save import img_save, image_read_cv2
 from utils.Valuation import Valuation
 
-model_pth = './model/NewFusion_6_10-03-12-45.pth'
-
+model_pth = './model/IVIF.pth'
 
 def val():
     for dataset_name in ['TNO','MSRS','RoadScene']:
-    # for dataset_name in ['TNO']:
-        Model_Name = 'NewFusion'
+
         print("The test result of " + dataset_name + ' :')
         test_folder = os.path.join('test_images', dataset_name)
         test_out_folder = os.path.join('Results', dataset_name)
         device = 'cuda' if torch.cuda.is_available() else 'cpu'
-        if torch.cuda.device_count() > 1:
-            Encoder1 = nn.DataParallel(encoder1()).to(device=device)
-            Encoder2 = nn.DataParallel(encoder2()).to(device=device)
-            Encoder3 = nn.DataParallel(encoder3()).to(device=device)
-            Decoder = nn.DataParallel(Restormer_Decoder()).to(device=device)
-        else:
-            Encoder1 = encoder1().to(device)
-            Encoder2 = encoder2().to(device)
-            Encoder3 = encoder3().to(device)
-            Decoder = Restormer_Decoder().to(device)
+        # if torch.cuda.device_count() > 1:
+        #     Encoder1 = nn.DataParallel(encoder1()).to(device=device)
+        #     Encoder2 = nn.DataParallel(encoder2()).to(device=device)
+        #     Encoder3 = nn.DataParallel(encoder3()).to(device=device)
+        #     Decoder = nn.DataParallel(Restormer_Decoder()).to(device=device)
+        # else:
+        Encoder1 = encoder1().to(device)
+        Encoder2 = encoder2().to(device)
+        Encoder3 = encoder3().to(device)
+        Decoder = Restormer_Decoder().to(device)
 
         Encoder1.load_state_dict(torch.load(model_pth, weights_only=True)['Encoder1'])
         Encoder2.load_state_dict(torch.load(model_pth, weights_only=True)['Encoder2'])

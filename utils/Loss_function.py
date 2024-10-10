@@ -11,7 +11,6 @@ Local_SSIMLoss = kornia.losses.SSIMLoss(3, reduction='mean')
 Global_SSIMLoss = kornia.losses.SSIMLoss(11, reduction='mean')
 Gradient_loss = nn.L1Loss(reduction='mean')
 
-# 函数返回一个标量值，表示输入的两幅图像之间的平均相关系数
 def cc(img1, img2):
     eps = torch.finfo(torch.float32).eps
     """Correlation coefficient for (N, C, H, W) image; torch.float32 [0.,1.]."""

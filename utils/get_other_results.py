@@ -10,7 +10,6 @@ eval_folder = '../Other methods/DATFuse/'
 
 metric_result = np.zeros((9))
 print('================================================================================')
-# for dataset_name in ['TNO', 'MSRS', 'RoadScene']:
 for dataset_name in ['Roadscene']:
     ori_img_folder = '../Other methods/DATFuse/'+dataset_name+'/'
     for img_name in os.listdir(os.path.join(ori_img_folder, "ir")):

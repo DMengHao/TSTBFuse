@@ -3,6 +3,9 @@ import pickle
 from skimage.io import imread
 import numpy as np
 from tqdm import tqdm
+'''
+Run it directly after downloading and you can find the saved training data under the data folder.
+'''
 train = True
 file = './data'
 if not os.path.isdir(file):
@@ -19,7 +22,6 @@ data = {}
 def is_low_contrast(image, fraction_threshold=0.1, lower_percentile=10,
                     upper_percentile=90):
     """Determine if an image is low contrast."""
-    # 亮度或强度对应的比例
     limits = np.percentile(image, [lower_percentile, upper_percentile])
     ratio = (limits[1] - limits[0]) / limits[1]
     return ratio < fraction_threshold
@@ -71,7 +73,6 @@ class preprocessing():
         for i in tqdm(range(len(ir_list))):
             ir_image = imread(ir_list[i]).astype(np.float32)[None, :, :]/255.0
             I_IR_Patch_Group = Im2Patch(ir_image, 128, 200)
-            # ir.append(ir_image)
             vi_image = np.transpose(imread(vi_list[i]).astype(np.float32),axes=(2,0,1))/255.0
             vi_image = preprocessing.RGB_to_2Y(vi_image)
             I_VIS_Patch_Group = Im2Patch(vi_image, 128, 200)

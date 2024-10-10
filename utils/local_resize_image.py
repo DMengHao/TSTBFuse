@@ -1,5 +1,4 @@
 import os
-
 import cv2
 import numpy as np
 from PIL import Image
@@ -136,28 +135,24 @@ def show_cvimg(im):
     return Image.fromarray(cv2.cvtColor(im,cv2.COLOR_BGR2RGB))
 
 def stack_image(path:str):
-    # 在指定的位置绘制正方形并在右下角放大该局部位置
-    # pt:正方形位置,width : 正方形宽度 scale: 放大倍数
     image = cv2.imread(path)
     h, w, c = image.shape
 
     if w % 2 != 0:
-        if h % 2 != 0:  # 宽高都是奇数
+        if h % 2 != 0:
             image = cv2.resize(image, (w - 1, h - 1))
-        else:  # 宽是奇数，高是偶数
+        else:
             image = cv2.resize(image, (w - 1, h))
-    elif h % 2 != 0:  # 高是奇数，宽是偶数
+    elif h % 2 != 0:
         image = cv2.resize(image, (w, h - 1))
 
-    # 定义缩放比
-    scale = h / w
     # patch1
     pt1_ = (pt1[0] + width1, pt1[1] + hight1)
     cv2.rectangle(image, pt1, pt1_, (0, 0, 255), 2)
     # patch2
     pt2_ = (pt2[0] + width2, pt2[1] + hight2)
     cv2.rectangle(image, pt2, pt2_, (0, 0, 255), 2)
-    # 要放大的部分
+
     patch1_ = image[pt1[1] + 2:pt1[1] + hight1 - 2, pt1[0] + 2:pt1[0] + width1 -2, :]
     t1 = patch1_.copy()
     cv2.rectangle(t1, (0, 0), (t1.shape[1]-1, t1.shape[0]-1), (0, 0, 255), 1)
@@ -182,8 +177,4 @@ if __name__ == '__main__':
     for i in range(len(temp_list)):
         cv2.imwrite(os.path.join('../all data/result_MRI_CT/',os.path.basename(temp_list[i])), stack_image(temp_list[i]), [cv2.IMWRITE_PNG_COMPRESSION, 0])
 
-
-# # 保存图片
-# image_stack = stack_image()
-# cv2.imwrite('image_stack.png', image_stack, [cv2.IMWRITE_PNG_COMPRESSION, 0])
 
