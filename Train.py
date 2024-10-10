@@ -2,7 +2,6 @@ import os
 import sys
 import time
 import datetime
-
 import cv2
 import kornia
 from torch import nn
@@ -10,9 +9,7 @@ from torch.utils.data import DataLoader
 import torch
 from MyDataset import MyDataset
 from Test.DenseBlock import DenseBlock as encoder1
-# from Test.Inception import Inception as encoder2
 from Test.Inception import Inception as encoder2
-# from Test.SAM import spatial_attention as encoder3
 from Test.VIFEM import VIFEM as encoder3
 from Test.Restormer_Decoder import Restormer_Decoder
 import utils.Loss_function as loss_function
@@ -78,9 +75,7 @@ def train():
     Gradient_loss = loss_function.Gradient_loss
 
     mean_loss = []
-    # epoch = 5
     for epoch in range(epochs):
-    # while epoch <= epochs:
         Temp_loss = 0
         for index, (ir_img, vi_img) in enumerate(dataloader):
 
@@ -105,9 +100,6 @@ def train():
                 vi_feature = Encoder3(vi_img)
                 ir_image = Decoder(ir_img, ir_vi_feature, ir_feature,None)
                 vi_image = Decoder(vi_img, ir_vi_feature, None,vi_feature)
-                # cc_loss_ir = cc(ir_vi_feature, ir_feature)
-                # cc_loss_vi = cc(ir_vi_feature, vi_feature)
-                # loss_decomp = (cc_loss_ir) ** 2 / (1.01 + cc_loss_vi)
 
                 mse_loss_ir = local_ssim * Local_SSIMLoss(ir_img, ir_image) + ir_mse * MSELoss(ir_img, ir_image)
                 mse_loss_vi = global_ssim * Global_SSIMLoss(vi_img, vi_image) + vi_mse * MSELoss(vi_img, vi_image)
@@ -140,9 +132,6 @@ def train():
 
                 mse_loss_ir = local_ssim * Local_SSIMLoss(ir_img, fusion_feature) + ir_mse * MSELoss(ir_img, fusion_feature)
                 mse_loss_vi = global_ssim * Global_SSIMLoss(vi_img, fusion_feature) + vi_mse * MSELoss(vi_img, fusion_feature)
-                # cc_loss_ir = cc(ir_feature, ir_vi_feature)
-                # cc_loss_vi = cc(vi_feature, ir_vi_feature)
-                # loss_decomp = (cc_loss_vi) ** 2 / (1.01 + cc_loss_ir)
                 ir_fusion_gradient_loss = Gradient_loss(kornia.filters.SpatialGradient()(ir_img),
                                                         kornia.filters.SpatialGradient()(fusion_feature))
                 vi_fusion_gradient_loss = Gradient_loss(kornia.filters.SpatialGradient()(vi_img),
@@ -165,10 +154,6 @@ def train():
                 optimizer3.step()
                 optimizer4.step()
 
-
-            #打印指标TNO
-
-
             batches_done = epoch * len(loader['train']) + index
             batches_left = epochs * len(loader['train']) - batches_done
             time_left = datetime.timedelta(seconds=batches_left * (time.time() - prev_time))
@@ -188,8 +173,7 @@ def train():
 
         scheduler1.step()
         scheduler2.step()
-        # scheduler3.step()
-        # scheduler4.step()
+
         if not epoch < first_phase:
             scheduler3.step()
             scheduler4.step()
@@ -214,7 +198,6 @@ def train():
             if not os.path.isdir('./model'):
                 os.mkdir('./model')
             torch.save(checkpoint, os.path.join(f"./model/NewFusion_{epoch+1}_" + timestamp + '.pth'))
-        # epoch = epoch+1
     Draw_loss_curve(epochs, Mean_Loss=torch.tensor(mean_loss).cpu(),run_time=timestamp)
 if __name__ == '__main__':
     train()
