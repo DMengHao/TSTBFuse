@@ -121,7 +121,7 @@ TSTBFuse           6.31    10.78    2.03      1.55    0.76    1.46
   <img src="./paper_results/RoadScene.png" width="80%">
 </p>
 <p align="center">
-  <img src="./MSRS.png" width="80%">
+  <img src="./paper_results/MSRS.png" width="80%">
 </p>
 <p align="center">
   <img src="./paper_results/MRI_CT.png" width="80%">
