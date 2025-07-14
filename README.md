@@ -115,23 +115,18 @@ TSTBFuse           6.31    10.78    2.03      1.55    0.76    1.46
   <img src="./frame_work.png" width="100%">
 </p>
 <p align="center">
-  <img src="./paper_results/TNO.png" width="100%">
+  <img src="./paper_results/TNO.png" width="80%">
 </p>
 <p align="center">
-  <img src="./paper_results/RoadScene.png" width="100%">
+  <img src="./paper_results/RoadScene.png" width="80%">
 </p>
 <p align="center">
-  <img src="./frame_work.png" width="100%">
+  <img src="./MSRS.png" width="80%">
 </p>
 <p align="center">
-  <img src="./paper_results/MRI_CT.png" width="100%">
+  <img src="./paper_results/MRI_CT.png" width="80%">
 </p>
 
-'''
-<div align="center"> <img src="./paper_results/TNO.png" width="45%" style="display:inline-block; margin-right:10px;"> <img src="./paper_results/MSRS.png" width="45%" style="display:inline-block;"> </div>
-
-<div align="center"> <img src="./paper_results/RoadScene.png" width="45%" style="display:inline-block; margin-right:10px;"> <img src="./paper_results/MRI_CT.png" width="45%" style="display:inline-block;"> </div>
-'''
 ## 📧 Contact
 
 For questions, contact: 332416020952@zzuli.edu.cn
