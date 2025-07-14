@@ -112,7 +112,7 @@ TSTBFuse           6.31    10.78    2.03      1.55    0.76    1.46
 ### Illustration of our TSTBFuse model.
 
 <p align="center">
-  <img src="./frame_work.png" width="60%">
+  <img src="./frame_work.png" width="100%">
 </p>
 
 
