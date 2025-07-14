@@ -109,12 +109,15 @@ TSTBFuse           6.31    10.78    2.03      1.55    0.76    1.46
 
 ## 🙌 TSTBFuse
 
-### Illustration of our TSTBFuse model.
+### Illustration of our TSTBFuse model and datasets results.
 
 <p align="center">
   <img src="./frame_work.png" width="100%">
 </p>
 
+<div align="center"> <img src="./paper_images/demo.jpg" width="45%" style="display:inline-block; margin-right:10px;"> <img src="./images/result_demo.jpg" width="45%" style="display:inline-block;"> </div>
+
+<div align="center"> <img src="./images/demo.jpg" width="45%" style="display:inline-block; margin-right:10px;"> <img src="./images/result_demo.jpg" width="45%" style="display:inline-block;"> </div>
 
 ## 📧 Contact
 
